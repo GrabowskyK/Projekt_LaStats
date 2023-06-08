@@ -6,8 +6,6 @@ namespace Projekt_LaStats.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        [ForeignKey("Liga")]
-        public int id_League { get; set; }
 
         public League League { get; set; }
     }
