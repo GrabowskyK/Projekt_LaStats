@@ -5,14 +5,20 @@ namespace Projekt_LaStats.Service
 {
     public class TeamService : ITeamService
     {
-        private readonly DatabaseContext _databaseContext;
+        private readonly DatabaseContext databaseContext;
 
-        public TeamService(DatabaseContext databaseContext)
+        public TeamService(DatabaseContext _databaseContext)
         {
-            _databaseContext = databaseContext;
+            databaseContext = _databaseContext;
         }
 
-        public IEnumerable<Team> GetAllTeams() => _databaseContext.Team;
+        public IEnumerable<Team> GetAllTeams() => databaseContext.Team;
 
+        public void DeleteTeam(int id)
+        {
+            var team = databaseContext.Team.FirstOrDefault(t => t.Id == id);
+            databaseContext.Remove(team);
+            databaseContext.SaveChanges();
+        }
     }
 }

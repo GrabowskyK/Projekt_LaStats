@@ -29,12 +29,14 @@ namespace Projekt_LaStats.Controllers
             return View();
         }
 
-        public IActionResult RemoveTeam()
+        [HttpPost]
+        public IActionResult DeleteTeam(int id)
         {
-            return View();
+            teamService.DeleteTeam(id);
+            return RedirectToAction("Teams");
         }
 
-        public IActionResult EditTeam()
+        public IActionResult EditTeam(int id)
         {
             return View();
         }
