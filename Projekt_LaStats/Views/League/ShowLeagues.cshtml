@@ -22,6 +22,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                <a asp-action="Team"></a>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>

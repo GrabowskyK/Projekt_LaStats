@@ -2,11 +2,6 @@
   "dependencies": {
     "secrets1": {
       "type": "secrets"
-    },
-    "sqlite1": {
-      "type": "sqlite",
-      "connectionId": "jdbc:sqlite:identifier.sqlite",
-      "dynamicId": null
     }
   }
 }

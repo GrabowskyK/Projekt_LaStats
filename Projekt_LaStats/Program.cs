@@ -10,7 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ITeamService,TeamService>();
 builder.Services.AddScoped<ILeagueService,LeagueService>();
 
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("Server = (localdb)\\mysql; Database = LaxStats; Trusted_Connection = True; MultipleActiveResultSets = true"));
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("Server = (localdb)\\mysql; Database = LaxStatsProjekt; Trusted_Connection = True; MultipleActiveResultSets = true"));
 
 var app = builder.Build();
 

@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Projekt_LaStats.Service;
 using Projekt_LaStats.Models;
 using System.Diagnostics;
-using Microsoft.EntityFrameworkCore;
+using System.Data.Entity;
+//using Microsoft.EntityFrameworkCore;
 
 namespace Projekt_LaStats.Controllers
 {
@@ -21,14 +22,14 @@ namespace Projekt_LaStats.Controllers
         [Route("Teams")]
         public IActionResult Teams()
         {
-            var item = teamService.GetAllTeams().ToList();
-            return View(teamService.GetAllTeams());
+            List<Team> teams = teamService.GetTeamAndLeagues().ToList();
+            return View(teams);
         }
-
+       
         public IActionResult AddTeam()
         {
-            var test = teamService.GetTeamAndLeagues();
-            return View(test);
+            List<Team> teams = teamService.GetTeamAndLeagues().ToList();
+            return View(teams);
         }
 
         [HttpPost]

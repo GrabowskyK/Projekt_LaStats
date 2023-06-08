@@ -19,5 +19,11 @@ namespace Projekt_LaStats.Controllers
             var item = leagueService.GetAllLeagues().ToList();
             return View(item);
         }
+
+        public IActionResult SoloLeagues()
+        {
+            var item = leagueService.GetLeague().toList();
+            return View(item);
+        }
     }
 }

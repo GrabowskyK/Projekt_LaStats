@@ -2,12 +2,6 @@
   "dependencies": {
     "secrets1": {
       "type": "secrets.user"
-    },
-    "sqlite1": {
-      "secretStore": "LocalSecretsFile",
-      "type": "sqlite.local",
-      "connectionId": "jdbc:sqlite:identifier.sqlite",
-      "dynamicId": null
     }
   }
 }
