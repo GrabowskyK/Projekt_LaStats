@@ -1,5 +1,6 @@
 ﻿using Projekt_LaStats.Context;
 using Projekt_LaStats.Models;
+using System.Data.Entity;
 
 namespace Projekt_LaStats.Service
 {
@@ -13,7 +14,7 @@ namespace Projekt_LaStats.Service
         }
 
         public IEnumerable<Team> GetAllTeams() => databaseContext.Team;
-
+        public IEnumerable<Team> GetTeamAndLeagues() => databaseContext.Team.Include(t => t.League);
         public void DeleteTeam(int id)
         {
             var team = databaseContext.Team.FirstOrDefault(t => t.Id == id);

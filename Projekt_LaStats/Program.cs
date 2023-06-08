@@ -2,11 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using Projekt_LaStats.Context;
 using Projekt_LaStats.Service;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ITeamService,TeamService>();
+builder.Services.AddScoped<ILeagueService,LeagueService>();
 
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("Server = (localdb)\\mysql; Database = LaxStats; Trusted_Connection = True; MultipleActiveResultSets = true"));
 
@@ -30,5 +32,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();

@@ -21,12 +21,21 @@ namespace Projekt_LaStats.Controllers
         [Route("Teams")]
         public IActionResult Teams()
         {
+            var item = teamService.GetAllTeams().ToList();
             return View(teamService.GetAllTeams());
         }
 
         public IActionResult AddTeam()
         {
-            return View();
+            var test = teamService.GetTeamAndLeagues();
+            return View(test);
+        }
+
+        [HttpPost]
+        public IActionResult AddTeam(Team team)
+        {
+            var team2 = team;
+            return RedirectToAction("Teams");
         }
 
         [HttpPost]

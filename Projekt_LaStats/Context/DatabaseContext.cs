@@ -8,5 +8,6 @@ namespace Projekt_LaStats.Context
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
         public DbSet<Team> Team { get; set; }
+        public DbSet<League> Leagues { get; set; }
     }
 }

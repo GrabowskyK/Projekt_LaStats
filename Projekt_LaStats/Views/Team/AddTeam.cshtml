@@ -1,4 +1,4 @@
-﻿@model Projekt_LaStats.Models.Team
+﻿@model IEnumerable<Projekt_LaStats.Models.Team>
 
 @{
     ViewData["Title"] = "AddTeam";
@@ -13,9 +13,15 @@
         <form asp-action="AddTeam">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+@*                <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="League"></label>*@
+                @foreach(var item in Model)
+                {
+                    <p>@item.Name</p>
+                    <p>@item.LeagueId</p>
+                }
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
