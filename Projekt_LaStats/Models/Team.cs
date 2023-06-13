@@ -8,6 +8,7 @@ namespace Projekt_LaStats.Models
         public string Name { get; set; }
         public int LeagueId { get; set; }
         public virtual League League { get; set; }
+        public ICollection<Player> Players { get; set; }
         public Team() { }
 
         public Team(string name)

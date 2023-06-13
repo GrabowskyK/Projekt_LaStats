@@ -7,7 +7,8 @@ namespace Projekt_LaStats.Context
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
-        public DbSet<Team> Teams { get; set; }
+        public DbSet<Team> Team { get; set; }
         public DbSet<League> Leagues { get; set; }
+        public DbSet<Player> Players { get; set; }
     }
 }

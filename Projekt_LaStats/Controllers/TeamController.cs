@@ -25,7 +25,14 @@ namespace Projekt_LaStats.Controllers
             List<Team> teams = teamService.GetTeamAndLeagues().ToList();
             return View(teams);
         }
-       
+        [Route("Teams/{id}")]
+        public IActionResult Teams(int id)
+        {
+            List<Team> teamByLeague = teamService.GetTeamByLeague(id).ToList();
+            return View(teamByLeague);
+        }
+
+
         public IActionResult AddTeam()
         {
             List<Team> teams = teamService.GetTeamAndLeagues().ToList();

@@ -20,10 +20,5 @@ namespace Projekt_LaStats.Controllers
             return View(item);
         }
 
-        public IActionResult SoloLeagues()
-        {
-            var item = leagueService.GetLeague().toList();
-            return View(item);
-        }
     }
 }

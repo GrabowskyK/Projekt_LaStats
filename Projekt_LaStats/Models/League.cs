@@ -4,8 +4,11 @@ namespace Projekt_LaStats.Models
 {
     public class League
     {
-        public int Id{ get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
+
+        public ICollection<Team> Teams { get; set; }
+
 
         public League() { }
 
