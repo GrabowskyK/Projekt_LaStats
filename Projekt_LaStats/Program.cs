@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ITeamService,TeamService>();
 builder.Services.AddScoped<ILeagueService,LeagueService>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
 
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("Server = (localdb)\\mysql; Database = LaxStat; Trusted_Connection = True; MultipleActiveResultSets = true"));
 

@@ -14,33 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Nazwa drużyny
                 
             </th>
-            <th>@Html.DisplayNameFor(model => model.League.Name)</th>
-            <th>
-                @Html.DisplayNameFor(model => model.League.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.League.Name)
-            </th>
+            <th>Liga</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                    <a asp-action="PlayersInTeam" asp-controller="Player" asp-route-id="@item.Id">
+                @Html.DisplayFor(modelItem => item.Name)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.League.Name)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.League.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.League.Name)
-                </td>
             <td>
                 <a asp-action="EditTeam" asp-route-id="@item.Id">Edit</a> |
                     <form method="POST" asp-action="DeleteTeam" asp-route-id="@item.Id">

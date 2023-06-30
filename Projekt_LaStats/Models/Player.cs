@@ -1,33 +1,35 @@
-﻿namespace Projekt_LaStats.Models
+﻿using System.ComponentModel;
+
+namespace Projekt_LaStats.Models
 {
     public class Player
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public DateTime Date_born { get; set; }
+        public DateTime DateBorn { get; set; }
         public PlayerPosition Position { get; set; }
-        public int Goals { get; set; } = 0;
-        public int Assist { get; set; } = 0;
-        public int Penalty { get; set; } = 0;
-        public int Minutes_penalty { get; set; } = 0;
-        public int Id_team { get; set; }
+        public int? Goals { get; set; } = 0;
+        public int? Assist { get; set; } = 0;
+        public int? Penalty { get; set; } = 0;
+        public int? MinutesPenalty { get; set; } = 0;
+        public int TeamId { get; set; }
         public virtual Team Team { get; set; }
+
 
         public Player() { }
 
-        public Player(string name, string surname, DateTime date_born, PlayerPosition position, int goals, int assist, int penalty, int minutes_penalty, int id_team, Team team)
+        public Player(string name, string surname, DateTime dateBorn, PlayerPosition position, int goals, int assist, int penalty, int minutesPenalty, int teamId)
         {
             Name = name;
             Surname = surname;
-            Date_born = date_born;
+            DateBorn = dateBorn;
             Position = position;
             Goals = goals;
             Assist = assist;
             Penalty = penalty;
-            Minutes_penalty = minutes_penalty;
-            Id_team = id_team;
-            Team = team;
+            MinutesPenalty = minutesPenalty;
+            TeamId = teamId;
         }
     }
 

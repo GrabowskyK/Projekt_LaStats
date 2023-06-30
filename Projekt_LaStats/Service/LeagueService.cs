@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Projekt_LaStats.Context;
 using Projekt_LaStats.Models;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Projekt_LaStats.Service
 {
