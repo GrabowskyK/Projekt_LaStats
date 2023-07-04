@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Projekt_LaStats.Service;
 using Projekt_LaStats.Models;
+using Projekt_LaStats.ViewModel;
 using System.Diagnostics;
 using System.Data.Entity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 //using Microsoft.EntityFrameworkCore;
 
 namespace Projekt_LaStats.Controllers
@@ -25,25 +27,30 @@ namespace Projekt_LaStats.Controllers
             List<Team> teams = teamService.GetTeamAndLeagues().ToList();
             return View(teams);
         }
-        //[Route("Teams/{id}")]
-        //public IActionResult Teams(int id)
-        //{
-        //    List<Team> teamByLeague = teamService.GetTeamByLeague(id).ToList();
-        //    List<Player> playersInTeam = teamService.GetPlayersFromTeam(id).ToList();
-        //    return View(playersInTeam);
-        //}
+
+        [Route("Teams/League_{id}")]
+        public IActionResult TeamsInLeague(int id)
+        {
+            List<Team> teamsInLeague = teamService.TeamsInLeague(id).ToList();
+            return View("~/Views/Team/Teams.cshtml", teamsInLeague);
+        }
 
 
         public IActionResult AddTeam()
         {
-            List<Team> teams = teamService.GetTeamAndLeagues().ToList();
-            return View(teams);
+            List<SelectListItem> NameLeague = teamService.LeaguesNames().ToList();
+            CreateTeamVM viewModel = new CreateTeamVM();
+            viewModel.NewTeam = new Team();
+            viewModel.leagues = NameLeague;
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult AddTeam(Team team)
+        public IActionResult AddTeam(CreateTeamVM createTeamVM)
         {
-            var team2 = team;
+            Team team = new(createTeamVM.NewTeam.Name, createTeamVM.NewTeam.LeagueId);
+            teamService.AddTeam(team);
             return RedirectToAction("Teams");
         }
 
@@ -53,10 +60,7 @@ namespace Projekt_LaStats.Controllers
             teamService.DeleteTeam(id);
             return RedirectToAction("Teams");
         }
+        
 
-        public IActionResult EditTeam(int id)
-        {
-            return View();
-        }
     }
 }

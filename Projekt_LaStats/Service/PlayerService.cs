@@ -21,5 +21,11 @@ namespace Projekt_LaStats.Service
         }
 
         //TODO: Sprawdzić czy dana drużyna istnieje
+        public void DeletePlayerById(int id)
+        {
+            var result = databaseContext.Players.FirstOrDefault(p => p.Id == id);
+            databaseContext.Remove(result);
+            databaseContext.SaveChanges();
+        }
     }
 }

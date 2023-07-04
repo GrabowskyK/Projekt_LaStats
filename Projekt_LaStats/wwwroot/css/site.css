@@ -23,3 +23,19 @@ body {
 td, tr{
     color: white;
 }
+
+.deleteButton {
+    width: 65px;
+    height: 30px;
+    background-color: #303030;
+    text-align:center;
+    font-size:14px;
+    margin: 3px;
+    border-radius: 8px;
+}
+
+.deleteButton:hover {
+    transition: 0.3s;
+    background-color: #DD3030;
+
+}

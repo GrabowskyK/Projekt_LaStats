@@ -6,5 +6,6 @@ namespace Projekt_LaStats.Service
     {
         IEnumerable<Player> GetPlayersFromTeam(int id);
         void AddPlayer(Player player);
+        void DeletePlayerById(int id);
     }
 }

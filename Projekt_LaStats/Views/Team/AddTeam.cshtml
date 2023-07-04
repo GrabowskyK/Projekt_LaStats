@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Projekt_LaStats.Models.Team>
+﻿@*@model Projekt_LaStats.Models.Team
+*@
+@model Projekt_LaStats.ViewModel.CreateTeamVM
 
 @{
     ViewData["Title"] = "AddTeam";
@@ -10,11 +12,17 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="Post" asp-action="AddTeam">
+        <form asp-action="AddTeam" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label>Name: </label>
-                <input type="text" name="Name"/>
+                <label asp-for="@Model.NewTeam.Name" class="control-label"></label>
+                <input asp-for="@Model.NewTeam.Name" class="form-control" />
+                <span asp-validation-for="@Model.NewTeam.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.NewTeam.LeagueId" class="control-label"></label>
+                <select asp-for="@Model.NewTeam.LeagueId" class="form-control" asp-items="@Model.leagues">
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

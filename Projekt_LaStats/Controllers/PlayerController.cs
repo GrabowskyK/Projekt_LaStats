@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Projekt_LaStats.Models;
 using Projekt_LaStats.Service;
+using System.Numerics;
 
 namespace Projekt_LaStats.Controllers
 {
@@ -38,7 +39,14 @@ namespace Projekt_LaStats.Controllers
         public IActionResult AddPlayerPost(Player player)
         {
             playerService.AddPlayer(player);
-            return RedirectToAction("AddPlayer");
+            return RedirectToAction("PlayersInTeam", new { id = player.TeamId });
+        }
+
+        [HttpPost]
+        public IActionResult DeletePlayer(int playerId, int teamId)
+        {
+            playerService.DeletePlayerById(playerId);
+            return RedirectToAction("PlayersInTeam", new { id =  teamId});
         }
     }
 }

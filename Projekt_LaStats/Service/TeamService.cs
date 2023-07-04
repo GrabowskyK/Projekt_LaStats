@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Projekt_LaStats.Context;
 using Projekt_LaStats.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Projekt_LaStats.Service
 {
@@ -18,12 +19,21 @@ namespace Projekt_LaStats.Service
         public IEnumerable<Team> GetTeamAndLeagues() => databaseContext.Team.Include(t => t.League);
         public IEnumerable<Team> GetTeamByLeague(int id) => databaseContext.Team.Include(t => t.League).Where(t => t.Id == id);
         
-
+        public void AddTeam(Team team)
+        {
+            var result = team;
+            databaseContext.Team.Add(team);
+            databaseContext.SaveChanges();
+        }
         public void DeleteTeam(int id)
         {
             var team = databaseContext.Team.FirstOrDefault(t => t.Id == id);
             databaseContext.Remove(team);
             databaseContext.SaveChanges();
         }
+
+        public IEnumerable<Team> GetLeagues() => databaseContext.Team.Include(t => t.League);
+        public List<SelectListItem> LeaguesNames() => databaseContext.Leagues.Select(l => new SelectListItem { Value = l.Id.ToString(), Text = l.Name}).ToList();
+        public IEnumerable<Team> TeamsInLeague(int id) => databaseContext.Team.Include(t => t.League).Where(t => t.LeagueId == id);
     }
 }

@@ -9,15 +9,14 @@
 <p>
     <a asp-action="AddTeam">Create New</a>
 </p>
-<h1>Teams</h1>
 <table class="table">
     <thead>
         <tr>
             <th>
                 Nazwa drużyny
-                
             </th>
             <th>Liga</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -31,10 +30,11 @@
                 @Html.DisplayFor(modelItem => item.League.Name)
             </td>
             <td>
-                <a asp-action="EditTeam" asp-route-id="@item.Id">Edit</a> |
-                    <form method="POST" asp-action="DeleteTeam" asp-route-id="@item.Id">
-                    <button type="submit" value="@item.Id">Delete</button>
-                    </form>
+                    @using (Html.BeginForm("DeleteTeam", "Team", new { id = item.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input class="deleteButton" type="submit" value="Usuń" />
+                    }
             </td>
         </tr>
 }
