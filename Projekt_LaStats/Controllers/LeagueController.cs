@@ -13,6 +13,7 @@ namespace Projekt_LaStats.Controllers
             logger = _logger;
             leagueService = _leagueService;
         }
+
         [Route("League")]
         public IActionResult ShowLeagues()
         {

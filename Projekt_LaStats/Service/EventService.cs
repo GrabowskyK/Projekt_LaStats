@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Projekt_LaStats.Service
 {
-    public class MatchesService : IMatchesService
+    public class EventService : IEventService
     {
         private readonly DatabaseContext databaseContext;
 
-        public MatchesService(DatabaseContext _databaseContext)
+        public EventService(DatabaseContext _databaseContext)
         {
             databaseContext = _databaseContext;
         }
 
-        public IEnumerable<Match> GetAllMatches() => databaseContext.Matches.Include(m => m.GuestTeam).Include(m => m.HomeTeam);
+        public IEnumerable<Event> GetEventsFromMatch(int id) => databaseContext.Events.Where(e => e.MatchId == id);
     }
 }
