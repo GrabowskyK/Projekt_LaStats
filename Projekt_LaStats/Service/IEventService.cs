@@ -6,5 +6,7 @@ namespace Projekt_LaStats.Service
     {
 
         IEnumerable<Event> GetEventsFromMatch(int id);
+        IEnumerable<Event> GetEventsFromMatchOnlyGoals(int id);
+        IEnumerable<Event> GetEventsFromMatchOnlyFauls(int id);
     }
 }

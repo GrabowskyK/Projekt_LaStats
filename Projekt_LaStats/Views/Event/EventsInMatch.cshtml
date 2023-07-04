@@ -1,5 +1,6 @@
-﻿@model IEnumerable<Projekt_LaStats.Models.Event>
-
+﻿@*@model IEnumerable<Projekt_LaStats.Models.Event>
+*@
+@model Projekt_LaStats.ViewModel.EventDisplayVM
 @{
     ViewData["Title"] = "EventsInMatch";
 }
@@ -9,35 +10,87 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PlayerEvent)
+                Zawodnik
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EventType)
+                Zawodnik
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlayerAssist)
+                Zawodnik
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PenaltyType)
+                Zawodnik
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PenaltyMinutes)
+                Zawodnik
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Match)
+                Zawodnik
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.eventGool)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlayerEvent.Name).ToString().Substring(0,1). @Html.DisplayFor(modelItem => item.PlayerEvent.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlayerAssist.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PenaltyType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PenaltyMinutes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Match.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Zawodnik
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.eventFaul) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PlayerEvent.Id)
+                    @Html.DisplayFor(modelItem => item.PlayerEvent.Name).ToString().Substring(0,1). @Html.DisplayFor(modelItem => item.PlayerEvent.Surname)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EventType)

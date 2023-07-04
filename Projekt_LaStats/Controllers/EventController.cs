@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Projekt_LaStats.Models;
 using Projekt_LaStats.Service;
-
+using Projekt_LaStats.ViewModel;
 
 namespace Projekt_LaStats.Controllers
 {
@@ -19,8 +20,10 @@ namespace Projekt_LaStats.Controllers
         [Route("Matches/{id}")]
         public IActionResult EventsInMatch(int id)
         {
-            var events = eventService.GetEventsFromMatch(id);
-            return View(events);
+            EventDisplayVM viewModel = new EventDisplayVM();
+            viewModel.eventGool = eventService.GetEventsFromMatchOnlyGoals(id);
+            viewModel.eventFaul = eventService.GetEventsFromMatchOnlyFauls(id);
+            return View(viewModel);
         }
     }
 }
