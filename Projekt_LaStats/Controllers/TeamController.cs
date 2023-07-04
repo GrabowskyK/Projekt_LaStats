@@ -49,7 +49,7 @@ namespace Projekt_LaStats.Controllers
         [HttpPost]
         public IActionResult AddTeam(CreateTeamVM createTeamVM)
         {
-            Team team = new(createTeamVM.NewTeam.Name, createTeamVM.NewTeam.LeagueId);
+            Team team = new(createTeamVM.NewTeam.Name, createTeamVM.NewTeam.ShortName, createTeamVM.NewTeam.LeagueId);
             teamService.AddTeam(team);
             return RedirectToAction("Teams");
         }

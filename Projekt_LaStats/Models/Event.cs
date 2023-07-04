@@ -5,6 +5,7 @@ namespace Projekt_LaStats.Models
     public class Event
     {
         public int Id { get; set; }
+        public string Time { get; set; }
         public int PlayerEventId { get; set; }
         public virtual Player PlayerEvent { get; set; }
         public EventType EventType { get; set; }
@@ -20,9 +21,10 @@ namespace Projekt_LaStats.Models
         public virtual Match Match { get; set; }
 
         public Event() { }
-        public Event(int id_player, Player playerEvent, EventType eventType, int? id_player_assist, Player? playerAssist, PenaltyType? penaltyType, int? penalty_minutes, int id_match)
+        public Event(int id_player, string time, Player playerEvent, EventType eventType, int? id_player_assist, Player? playerAssist, PenaltyType? penaltyType, int? penalty_minutes, int id_match)
         {
             PlayerEventId = id_player;
+            Time = time;
             PlayerEvent = playerEvent;
             EventType = eventType;
             PlayerAssistId = id_player_assist;

@@ -16,9 +16,10 @@ namespace Projekt_LaStats.Models
         public ICollection<Match> TeamAway { get; set; }
         public Team() { }
 
-        public Team(string name, int leagueId)
+        public Team(string name, string shortName, int leagueId)
         {
             Name = name;
+            ShortName = shortName;
             LeagueId = leagueId;
         }
     }

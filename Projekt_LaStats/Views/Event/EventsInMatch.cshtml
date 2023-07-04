@@ -90,6 +90,9 @@
 @foreach (var item in Model.eventFaul) {
         <tr>
             <td>
+                    @Html.DisplayFor(modelItem => item.PlayerEvent.Team.ShortName)
+            </td>
+            <td>
                     @Html.DisplayFor(modelItem => item.PlayerEvent.Name).ToString().Substring(0,1). @Html.DisplayFor(modelItem => item.PlayerEvent.Surname)
             </td>
             <td>

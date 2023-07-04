@@ -15,8 +15,8 @@ namespace Projekt_LaStats.Service
 
         public IEnumerable<Event> GetEventsFromMatch(int id) => databaseContext.Events.Where(e => e.MatchId == id).Include(e => e.PlayerEvent).Include(e => e.PlayerAssist);
 
-        public IEnumerable<Event> GetEventsFromMatchOnlyGoals(int id) => databaseContext.Events.Where(e => e.MatchId == id && e.EventType == (EventType)0).Include(e => e.PlayerEvent).Include(e => e.PlayerAssist);
-        public IEnumerable<Event> GetEventsFromMatchOnlyFauls(int id) => databaseContext.Events.Where(e => e.MatchId == id && e.EventType == (EventType)1).Include(e => e.PlayerEvent).Include(e => e.PlayerAssist);
+        public IEnumerable<Event> GetEventsFromMatchOnlyGoals(int id) => databaseContext.Events.Where(e => e.MatchId == id && e.EventType == (EventType)0).Include(e => e.PlayerEvent).Include(e => e.PlayerAssist).ThenInclude(p => p.Team);
+        public IEnumerable<Event> GetEventsFromMatchOnlyFauls(int id) => databaseContext.Events.Where(e => e.MatchId == id && e.EventType == (EventType)1).Include(e => e.PlayerEvent).ThenInclude(p => p.Team);
 
     }
 }

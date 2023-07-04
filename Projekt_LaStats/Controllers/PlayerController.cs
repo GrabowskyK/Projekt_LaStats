@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Projekt_LaStats.Models;
 using Projekt_LaStats.Service;
 using System.Numerics;
@@ -25,7 +26,15 @@ namespace Projekt_LaStats.Controllers
         public IActionResult PlayersInTeam(int id)
         {
             List<Player> playersInTeam = playerService.GetPlayersFromTeam(id).ToList();
-            return View(playersInTeam);
+            if (playersInTeam.Any())
+            {
+                return View(playersInTeam);
+            }
+            else
+            {
+               return RedirectToAction("AddPlayer", new { id = id });
+            }
+                
         }
         [Route("Teams/{id}/AddPlayer")]
         public IActionResult AddPlayer(int id)
