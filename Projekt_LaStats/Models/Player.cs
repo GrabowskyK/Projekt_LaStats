@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Identity.Client;
+using System.ComponentModel;
 
 namespace Projekt_LaStats.Models
 {
     public class Player
     {
         public int Id { get; set; }
+        public int? ShirtNumber { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateBorn { get; set; }
@@ -19,7 +21,7 @@ namespace Projekt_LaStats.Models
 
         public Player() { }
 
-        public Player(string name, string surname, DateTime dateBorn, PlayerPosition position, int goals, int assist, int penalty, int minutesPenalty, int teamId)
+        public Player(string name, string surname, DateTime dateBorn, PlayerPosition position, int goals, int assist, int penalty, int minutesPenalty, int shirtNumber, int teamId)
         {
             Name = name;
             Surname = surname;
@@ -29,6 +31,7 @@ namespace Projekt_LaStats.Models
             Assist = assist;
             Penalty = penalty;
             MinutesPenalty = minutesPenalty;
+            ShirtNumber = shirtNumber;
             TeamId = teamId;
         }
     }
