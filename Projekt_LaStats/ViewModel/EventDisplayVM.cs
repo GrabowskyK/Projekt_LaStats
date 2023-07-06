@@ -6,5 +6,6 @@ namespace Projekt_LaStats.ViewModel
     {
         public IEnumerable<Event> eventGool { get; set; }
         public IEnumerable<Event> eventFaul { get; set; }
+        public int MatchId { get; set; }
     }
 }

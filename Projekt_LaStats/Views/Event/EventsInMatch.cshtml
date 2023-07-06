@@ -8,82 +8,113 @@
 <h1>EventsInMatch</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="AddEvent" asp-route-id="@Model.MatchId">Create New</a>
 </p>
 
+<h1>Goals</h1>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Zawodnik
+                Time
             </th>
             <th>
-                Zawodnik
+                Score
             </th>
             <th>
-                Zawodnik
+                Team
             </th>
             <th>
-                Zawodnik
+                Number
             </th>
             <th>
-                Zawodnik
+                Player
             </th>
-            <th>
-                Zawodnik
-
+            <th colspan="2">
+                Assist
             </th>
+            
         </tr>
     </thead>
     <tbody>
+        @{
+            var SumGoalHome = 0;
+            var SumGoalAway = 0;
+
+        }
         @foreach (var item in Model.eventGool)
         {
+
+            @if (item.PlayerEvent.Team.ShortName == Model.eventGool.FirstOrDefault().Match.HomeTeam.ShortName)
+            {
+                SumGoalHome += 1;
+            }
+            else
+            {
+                SumGoalAway += 1;
+            }
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PlayerEvent.Name).ToString().Substring(0,1). @Html.DisplayFor(modelItem => item.PlayerEvent.Surname)
+                    @Html.DisplayFor(modelItem => item.Time)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EventType)
+                    @SumGoalHome : @SumGoalAway
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PlayerAssist.Id)
+                    @Html.DisplayFor(modelItem => item.PlayerEvent.Team.ShortName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PenaltyType)
+                    @Html.DisplayFor(modelItem => item.PlayerEvent.ShirtNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PenaltyMinutes)
+                    @{
+                        var firstLetterName = item.PlayerEvent.Name.Substring(0, 1);
+                    }
+                    @firstLetterName. @Html.DisplayFor(modelItem => item.PlayerEvent.Surname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Match.Id)
+                    @Html.DisplayFor(modelItem => item.PlayerAssist.ShirtNumber)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @{
+                        var firstLetterAssistName = "";
+                        if(item.PlayerAssist != null)
+                        {
+                            firstLetterAssistName = item.PlayerAssist.Name.Substring(0, 1) + ".";
+                        }
+                        else
+                        {
+                            firstLetterAssistName = null;
+                        }
+
+                    }
+                    @firstLetterAssistName @Html.DisplayFor(modelItem => item.PlayerAssist.Surname)
                 </td>
+                
             </tr>
         }
     </tbody>
 </table>
 
+<h1>Penalties</h1>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Zawodnik
+                Team
             </th>
             <th>
+                Number
             </th>
             <th>
+                Player
             </th>
             <th>
+                Type
             </th>
             <th>
+                Minutes
             </th>
-            <th>
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -92,28 +123,17 @@
             <td>
                     @Html.DisplayFor(modelItem => item.PlayerEvent.Team.ShortName)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlayerEvent.ShirtNumber)
+                </td>
             <td>
                     @Html.DisplayFor(modelItem => item.PlayerEvent.Name).ToString().Substring(0,1). @Html.DisplayFor(modelItem => item.PlayerEvent.Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlayerAssist.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PenaltyType)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PenaltyMinutes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Match.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

@@ -69,9 +69,12 @@
                 @Html.DisplayFor(modelItem => item.HomeTeam.Name)
                 </a>
         </div>
+            
         <div class="match-info">
                 <p style="font-size: 33px;">
+                    <a asp-action="EventsInMatch" asp-controller="Event" asp-route-id="@item.Id">
                     @Html.DisplayFor(modelItem => item.ScoreHomeTeam) : @Html.DisplayFor(modelItem => item.ScoreGuestTeam)
+                    </a>
                 </p>
                 <p style="font-size: 13px;"> 
                     @Html.DisplayFor(modelItem => item.Date)<br>
