@@ -14,5 +14,6 @@ namespace Projekt_LaStats.Service
         List<SelectListItem> GetPlayersInTeam(int idHomeTeam, int idAwayTeam);
         void AddEvent(Event newEvent);
         void UpdateDataAboutPlayerStats(Event newEvent);
+        void UpdateDataAboutScore(Event newEvent);
     }
 }

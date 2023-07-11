@@ -48,6 +48,7 @@ namespace Projekt_LaStats.Controllers
         public IActionResult AddEventPost(Event newEvent){
             eventService.AddEvent(newEvent);
             eventService.UpdateDataAboutPlayerStats(newEvent);
+            eventService.UpdateDataAboutScore(newEvent);
             return RedirectToAction("EventsInMatch", new { id = newEvent.MatchId });
         }
     }

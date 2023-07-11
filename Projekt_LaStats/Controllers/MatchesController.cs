@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Projekt_LaStats.Service;
+using Projekt_LaStats.ViewModel;
+using Projekt_LaStats.Models;
+using System.Text.RegularExpressions;
 
 namespace Projekt_LaStats.Controllers
 {
@@ -19,6 +22,26 @@ namespace Projekt_LaStats.Controllers
         {
             var matches = matchesService.GetAllMatches();
             return View(matches);
+        }
+
+        [Route("Matches/AddMatch")]
+        public IActionResult AddMatch()
+        {
+            CreateMatchVM viewModel = new CreateMatchVM();
+            viewModel.teams = matchesService.GetTeams();
+            viewModel.match = new Models.Match();
+            return View(viewModel);
+        }
+
+
+        [HttpPost]
+        public IActionResult AddMatchPost(Models.Match match)
+        {
+            var result = match;
+            match.ScoreHomeTeam = 0;
+            match.ScoreGuestTeam = 0;
+            var xd = matchesService.GetAllMatches();
+            return RedirectToAction("Matches");
         }
     }
 }

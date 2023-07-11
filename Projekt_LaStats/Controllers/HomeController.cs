@@ -17,6 +17,7 @@ namespace Projekt_LaStats.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

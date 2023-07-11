@@ -7,61 +7,8 @@
 <h1>Matches</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="AddMatch" asp-controller="Matches">Create new match</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.HomeTeam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GuestTeam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ScoreHomeTeam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ScoreGuestTeam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Place)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                    @Html.DisplayFor(modelItem => item.HomeTeam.Name)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.GuestTeam.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScoreHomeTeam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScoreGuestTeam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Place)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
     @foreach (var item in Model){
     <div class="Match">
         <div class="match-left-team">

@@ -84,5 +84,18 @@ namespace Projekt_LaStats.Service
             }
             databaseContext.SaveChanges();
         }
+        public void UpdateDataAboutScore(Event newEvent)
+        {
+            var recordMatch = databaseContext.Matches.Where(m => m.Id == newEvent.MatchId).FirstOrDefault();
+            if(recordMatch.HomeTeamId == newEvent.PlayerEvent.TeamId && newEvent.EventType == (EventType)0)
+            {
+                recordMatch.ScoreHomeTeam += 1;
+            }
+            else
+            {
+                recordMatch.ScoreGuestTeam += 1;
+            }
+            databaseContext.SaveChanges();
+        }
     }
 }

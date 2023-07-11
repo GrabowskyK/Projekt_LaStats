@@ -15,5 +15,11 @@ namespace Projekt_LaStats.Service
         }
 
         public IEnumerable<League> GetAllLeagues() => databaseContext.Leagues;
+
+        public void CreateLeague(League league)
+        {
+            databaseContext.Leagues.Add(league);
+            databaseContext.SaveChanges();
+        }
     }
 }

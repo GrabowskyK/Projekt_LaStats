@@ -40,6 +40,7 @@
         @{
             var SumGoalHome = 0;
             var SumGoalAway = 0;
+            var color = "#303030";
 
         }
         @foreach (var item in Model.eventGool)
@@ -48,12 +49,14 @@
             @if (item.PlayerEvent.Team.ShortName == Model.eventGool.FirstOrDefault().Match.HomeTeam.ShortName)
             {
                 SumGoalHome += 1;
+                color = "#303030";
             }
             else
             {
                 SumGoalAway += 1;
+                color = "#454545";
             }
-            <tr>
+            <tr style="background-color: @color">
                 <td>
                     @Html.DisplayFor(modelItem => item.Time)
                 </td>
@@ -119,7 +122,15 @@
     </thead>
     <tbody>
 @foreach (var item in Model.eventFaul) {
-        <tr>
+            if (item.PlayerEvent.Team.ShortName == Model.eventFaul.FirstOrDefault().Match.HomeTeam.ShortName)
+            {
+                color = "#303030";
+            }
+            else
+            {
+                color = "#454545";
+            }
+            <tr style="background-color: @color;">
             <td>
                     @Html.DisplayFor(modelItem => item.PlayerEvent.Team.ShortName)
             </td>
