@@ -11,6 +11,10 @@ namespace Projekt_LaStats.Models
         public string ShortName { get; set; }
         public int LeagueId { get; set; }
         public virtual League League { get; set; }
+        
+        public int wins { get; set; }
+        public int draw { get; set; }
+        public int lose { get; set; }
 
         public ICollection<Match> TeamHost { get; set; }
         public ICollection<Match> TeamAway { get; set; }

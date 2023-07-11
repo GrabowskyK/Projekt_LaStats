@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IHomeService, HomeService>();
+builder.Services.AddScoped<IInfoService, InfoService>();
 builder.Services.AddScoped<ITeamService,TeamService>();
 builder.Services.AddScoped<ILeagueService,LeagueService>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();

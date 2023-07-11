@@ -1,11 +1,17 @@
-﻿@{
+﻿@model IEnumerable<Projekt_LaStats.Models.League>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <ol>
-        <li>Leagues</li>
-    </ol>
+    
+    @foreach(var item in Model)
+    {
+        <div>
+            <a asp-action=""></a>
+            <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+            </div>
+    }
 </div>
