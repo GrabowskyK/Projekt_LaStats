@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Projekt_LaStats.Models.Player>
+
+@{
+    ViewData["Title"] = "InfoPlayer";
+}
+
+<h1>InfoPlayer</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Goals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assist)
+            </th>
+            <th>
+                Points
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            
+            <td>
+                    @Html.DisplayFor(modelItem => item.Surname), @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShirtNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Goals)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Assist)
+            </td>
+            <td>
+                @(@item.Goals*2+@item.Assist)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

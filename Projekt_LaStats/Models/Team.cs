@@ -15,6 +15,9 @@ namespace Projekt_LaStats.Models
         public int wins { get; set; }
         public int draw { get; set; }
         public int lose { get; set; }
+        public int points { get; set; }
+        public int ScoredGoals { get; set; }
+        public int LostGoals { get; set; }
 
         public ICollection<Match> TeamHost { get; set; }
         public ICollection<Match> TeamAway { get; set; }

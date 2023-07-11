@@ -13,6 +13,8 @@ namespace Projekt_LaStats.Models
         public PlayerPosition Position { get; set; }
         public int? Goals { get; set; } = 0;
         public int? Assist { get; set; } = 0;
+
+        public int Points { get; set; } = 0;
         public int? Penalty { get; set; } = 0;
         public int? MinutesPenalty { get; set; } = 0;
         public int TeamId { get; set; }

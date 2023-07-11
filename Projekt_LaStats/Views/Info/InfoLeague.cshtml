@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Projekt_LaStats.Models.Team>
+@{
+    ViewData["Title"] = "Info";
+}
+<div>
+    <table class="table">
+        <tbody>
+        <tr style="text-align:center">
+                <td class="td-choose-option">Teams</td>
+                <td class="td-choose-option">
+                    <a asp-action="Matches" asp-controller="Matches" asp-route-id="@Model.FirstOrDefault().LeagueId">Games</a>
+                    </td>
+                <td class="td-choose-option">
+                    <a asp-action="InfoPlayerGoals" asp-route-id="@Model.FirstOrDefault().LeagueId">
+                    Points
+                    </a>
+                    </td>
+                <td class="td-choose-option">Penalties</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<table class="table" style="width: 700px">
+    <thead>
+        <tr style="text-align:center">
+            <th>
+                Rank
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Games Played
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.wins)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.draw)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.points)
+            </th>
+            <th>
+                Bilance
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="td-info">
+                    @item.Id
+                </td>
+                <td class="td-info" style="width: 300px; font-size: 20px">
+                        @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="td-info">
+                    @(@item.wins+@item.lose+@item.draw)
+                </td>
+                <td class="td-info">
+                        @Html.DisplayFor(modelItem => item.wins)
+                </td>
+                <td class="td-info">
+                        @Html.DisplayFor(modelItem => item.lose)
+                </td>
+                <td class="td-info">
+                    @Html.DisplayFor(modelItem => item.draw)
+                </td>
+                <td class="td-info">
+                    @Html.DisplayFor(modelItem => item.points)
+                </td>
+                <td class="td-info">
+                    @Html.DisplayFor(modelItem => item.ScoredGoals) : @Html.DisplayFor(modelItem => item.LostGoals)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

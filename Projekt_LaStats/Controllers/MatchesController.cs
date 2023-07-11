@@ -18,9 +18,9 @@ namespace Projekt_LaStats.Controllers
         }
 
         [Route("Matches")]
-        public IActionResult Matches()
+        public IActionResult Matches(int id)
         {
-            var matches = matchesService.GetAllMatches();
+            var matches = matchesService.GetAllMatches().Where(m => m.HomeTeam.LeagueId == id);
             return View(matches);
         }
 

@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projekt_LaStats.Models;
+using Projekt_LaStats.ViewModel;
 using Projekt_LaStats.Service;
 using System.Diagnostics;
 
 namespace Projekt_LaStats.Controllers
 {
-    public class InfoController
+    public class InfoController : Controller
     {
         private readonly ILogger<InfoController> logger;
         private readonly IInfoService infoService;
@@ -17,10 +18,19 @@ namespace Projekt_LaStats.Controllers
             infoService = _infoService;
         }
 
-        //public IActionResult InfoLeague()
-        //{
+        [Route("{id}")]
+        public IActionResult InfoLeague(int id)
+        {
+            var teams = infoService.TeamsInLeagueStats(id).ToList();
+            var players = infoService.GetScoredPlayers(id).Sum(p => p.Goals);
+            return View(teams);
+        }
 
-        //    return View();
-        //}
+        [Route("{id}/points")]
+        public IActionResult InfoPlayerGoals(int id)
+        {
+            var players = infoService.GetScoredPlayers(id).Sum(p => p.Goals);
+            return View(players);
+        }
     }
 }

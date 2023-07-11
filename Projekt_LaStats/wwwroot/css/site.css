@@ -102,3 +102,18 @@ a{
 a:hover{
     color: forestgreen;
 }
+
+.td-info {
+    width: 30px;
+    border: 1px solid black;
+    text-align: center;
+}
+class
+
+td-choose-option{
+    font-size: 21px;
+}
+.td-choose-option:hover {
+    transition: all 0.3s;
+    background-color: #506050;
+}
