@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Projekt_LaStats.Models.Player>
 
 @{
-    ViewData["Title"] = "InfoPlayer";
+    ViewData["Title"] = "InfoPlayerPenalty";
 }
 <div>
     <table class="table">
@@ -11,25 +11,25 @@
                     <a asp-action="InfoLeague" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
                         <div>Teams</div>
                     </a>
-                    </td>
+                </td>
                 <td class="td-choose-option">
                     <a asp-action="Matches" asp-controller="Matches" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
                         <div>Games</div>
                     </a>
                 </td>
-                <td class="td-choose-option" style="background-color: #505050">
-                        <div>Points</div>
-                </td>
                 <td class="td-choose-option">
-                    <a asp-action="InfoPlayerPenalty" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
-                        <div>Penalties</div>
+                    <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
+                        <div>Points</div>
                     </a>
+                </td>
+                <td class="td-choose-option" style="background-color: #505050">
+                        <div>Penalties</div>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-<h1>InfoPlayer</h1>
+<h1>Penalties</h1>
 <table class="table" style="width: 700px; margin: 0 auto;">
     <thead style="text-align:center;">
         <tr>
@@ -45,13 +45,10 @@
                 @Html.DisplayNameFor(model => model.Team)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Goals)
+                @Html.DisplayNameFor(model => model.Penalty)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Assist)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Points)
+                Minutes penalty
             </th>
         </tr>
     </thead>
@@ -59,31 +56,29 @@
         @{
             var iterate = 1;
         }
-@foreach (var item in Model) {
-        <tr>
-            <td style="width: 30px;">@iterate</td>
-            @{
-                iterate++;
-            }
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: 30px;">@iterate</td>
+                @{
+                    iterate++;
+                }
+                <td>
                     @Html.DisplayFor(modelItem => item.Surname), @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td style="text-align:center;">
-                @Html.DisplayFor(modelItem => item.ShirtNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Team.Name)
-            </td>
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.ShirtNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team.Name)
+                </td>
                 <td class="td-info">
-                @Html.DisplayFor(modelItem => item.Goals)
-            </td>
+                    @Html.DisplayFor(modelItem => item.Penalty)
+                </td>
                 <td class="td-info">
-                @Html.DisplayFor(modelItem => item.Assist)
-            </td>
-                <td class="td-info">
-                @Html.DisplayFor(modelItem => item.Points)
-            </td>
-        </tr>
-}
+                    @Html.DisplayFor(modelItem => item.MinutesPenalty)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

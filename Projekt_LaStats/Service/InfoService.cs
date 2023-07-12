@@ -15,8 +15,8 @@ namespace Projekt_LaStats.Service
         }
 
         public IEnumerable<Team> TeamsInLeagueStats(int id) => databaseContext.Team.Where(t => t.LeagueId == id);
-        public IEnumerable<Player> GetScoredPlayers(int id) => databaseContext.Players.Include(p => p.Team).Where(p => p.Goals > 0).Where(p => p.Team.LeagueId == id);
-        //public IEnumerable<Player> GetPenaltyPlayers(int id) => databaseContext.Players.Where(p => p.Penalty > 0).Include(p => p.Team).Where(p => p.Team.LeagueId == id);
+        public IEnumerable<Player> GetScoredPlayers(int id) => databaseContext.Players.Include(p => p.Team).Where(p => p.Goals > 0).Where(p => p.Team.LeagueId == id).OrderByDescending(p => p.Points);
+        public IEnumerable<Player> GetPenaltyPlayers(int id) => databaseContext.Players.Where(p => p.Penalty > 0).Include(p => p.Team).Where(p => p.Team.LeagueId == id).OrderByDescending(p => p.MinutesPenalty);
 
     }
 }

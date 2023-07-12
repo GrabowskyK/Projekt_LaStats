@@ -2,7 +2,6 @@
 using Projekt_LaStats.Service;
 using Projekt_LaStats.ViewModel;
 using Projekt_LaStats.Models;
-using System.Text.RegularExpressions;
 
 namespace Projekt_LaStats.Controllers
 {
@@ -29,19 +28,20 @@ namespace Projekt_LaStats.Controllers
         {
             CreateMatchVM viewModel = new CreateMatchVM();
             viewModel.teams = matchesService.GetTeams();
-            viewModel.match = new Models.Match();
+            viewModel.match = new Match();
             return View(viewModel);
         }
 
-
+        [Route("Matches/AddMatchPost")]
         [HttpPost]
-        public IActionResult AddMatchPost(Models.Match match)
+        public IActionResult AddMatchPost(CreateMatchVM viewModel)
         {
-            var result = match;
-            match.ScoreHomeTeam = 0;
-            match.ScoreGuestTeam = 0;
-            var xd = matchesService.GetAllMatches();
-            return RedirectToAction("Matches");
+            viewModel.match.ScoreHomeTeam = 0;
+            viewModel.match.ScoreGuestTeam = 0;
+            viewModel.match.Date = new DateTime(viewModel.year, viewModel.month, viewModel.day);
+            matchesService.AddMatch(viewModel.match);
+            var leagueId = matchesService.GetLeagueId(viewModel.match.HomeTeamId);
+            return RedirectToAction("Matches", new {id = leagueId });
         }
     }
 }

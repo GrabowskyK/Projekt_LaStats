@@ -3,7 +3,32 @@
 @{
     ViewData["Title"] = "Matches";
 }
-
+<div>
+    <table class="table">
+        <tbody>
+            <tr style="text-align:center">
+                <td class="td-choose-option">
+                    <a asp-action="InfoLeague" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().HomeTeam.LeagueId">
+                        <div>Teams</div>
+                    </a>
+                    </td>
+                <td class="td-choose-option" style="background-color: #505050">
+                        <div>Games</div>
+                </td>
+                <td class="td-choose-option">
+                    <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().HomeTeam.LeagueId">
+                        <div>Points</div>
+                    </a>
+                </td>
+                <td class="td-choose-option">
+                    <a asp-action="InfoPlayerPenalty" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().HomeTeam.LeagueId">
+                        <div>Penalties</div>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <h1>Matches</h1>
 
 <p>
@@ -24,7 +49,7 @@
                     </a>
                 </p>
                 <p style="font-size: 13px;"> 
-                    @Html.DisplayFor(modelItem => item.Date)<br>
+                    @item.Date.ToString().Substring(0,10)<br>
                     @Html.DisplayFor(modelItem => item.Place)
                 </p>
                 

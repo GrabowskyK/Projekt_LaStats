@@ -6,5 +6,6 @@ namespace Projekt_LaStats.Service
     {
         IEnumerable<Team> TeamsInLeagueStats(int id);
         IEnumerable<Player> GetScoredPlayers(int id);
+        IEnumerable<Player> GetPenaltyPlayers(int id);
     }
 }

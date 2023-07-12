@@ -6,21 +6,27 @@
     <table class="table">
         <tbody>
         <tr style="text-align:center">
-                <td class="td-choose-option">Teams</td>
+                <td class="td-choose-option" style="background-color: #505050">Teams</td>
                 <td class="td-choose-option">
-                    <a asp-action="Matches" asp-controller="Matches" asp-route-id="@Model.FirstOrDefault().LeagueId">Games</a>
+                    <a asp-action="Matches" asp-controller="Matches" asp-route-id="@Model.FirstOrDefault().LeagueId">
+                        <div>Games</div>
+                        </a>
                     </td>
                 <td class="td-choose-option">
-                    <a asp-action="InfoPlayerGoals" asp-route-id="@Model.FirstOrDefault().LeagueId">
-                    Points
+                    <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().LeagueId">
+                        <div>Points</div>
                     </a>
                     </td>
-                <td class="td-choose-option">Penalties</td>
+                <td class="td-choose-option">
+                    <a asp-action="InfoPlayerPenalty" asp-controller="Info"  asp-route-id="@Model.FirstOrDefault().LeagueId">
+                        <div>Penalties</div>
+                    </a>
+                </td>
         </tr>
         </tbody>
     </table>
 </div>
-<table class="table" style="width: 700px">
+<table class="table" style="width: 700px; margin: 0 auto;">
     <thead>
         <tr style="text-align:center">
             <th>

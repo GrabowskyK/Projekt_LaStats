@@ -96,11 +96,13 @@ td, tr{
     width: auto;
     display: flex;
 }
+
 a{
     color: white;
 }
+
 a:hover{
-    color: forestgreen;
+    color: white;
 }
 
 .td-info {
@@ -108,12 +110,13 @@ a:hover{
     border: 1px solid black;
     text-align: center;
 }
-class
 
-td-choose-option{
+.td-choose-option{
     font-size: 21px;
+    color: white;
 }
 .td-choose-option:hover {
     transition: all 0.3s;
-    background-color: #506050;
+    background-color: #606060;
+    color: white;
 }
