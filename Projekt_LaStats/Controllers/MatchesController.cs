@@ -48,5 +48,13 @@ namespace Projekt_LaStats.Controllers
             var leagueId = matchesService.GetLeagueId(viewModel.match.HomeTeamId);
             return RedirectToAction("Matches", new {id = leagueId });
         }
+
+        [HttpPost]
+        public IActionResult GameEnded(int id)
+        {
+            matchesService.ChangeGameEnd(id);
+            var leagueId = matchesService.GetLeagueIdFromMatchid(id);
+            return RedirectToAction("InfoLeague", "Info", new { id = leagueId });
+        }
     }
 }

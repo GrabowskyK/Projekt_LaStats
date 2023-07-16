@@ -32,6 +32,13 @@
         </tr>
     </tbody>
 </table>
+<form asp-action="GameEnded" asp-controller="Matches" asp-route-id="@Model.MatchId">
+    <label>Is game end?</label>
+    <input asp-for="@Model.IsGameEnd" value="@Model.IsGameEnd" type="checkbox" />
+    <div class="form-group">
+        <input type="submit" value="Change" class="btn btn-primary" />
+    </div>
+</form>
 <h1>Goals</h1>
 <table class="table">
     <thead>

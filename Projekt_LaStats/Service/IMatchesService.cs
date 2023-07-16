@@ -9,5 +9,7 @@ namespace Projekt_LaStats.Service
         List<SelectListItem> GetTeamsFromLeague(int id);
         void AddMatch(Match match);
         int GetLeagueId(int id);
+        void ChangeGameEnd(int id);
+        int GetLeagueIdFromMatchid(int id);
     }
 }
