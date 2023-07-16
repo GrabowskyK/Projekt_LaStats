@@ -4,13 +4,11 @@
     ViewData["Title"] = "AddEvent";
 }
 
-<h1>AddEvent</h1>
-
-<h4>Event</h4>
+<h1>Add penalty</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddEventPost" asp-controller="Event">
+        <form asp-action="AddEventPenaltyPost" asp-controller="Event">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="@Model.NewEvent.Time" class="control-label"></label>
@@ -18,26 +16,27 @@
                 <span asp-validation-for="@Model.NewEvent.Time" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @if (Model.playersInMatch.Count == 0)
+                {
+                <p style="color: red;font-size:20px;">At first you have to add players to team.</p>
                 <label>Player</label>
-                <select asp-for="@Model.NewEvent.PlayerEventId" class="form-control" asp-items="@Model.playersInMatch">
-                    <option value="null"></option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Event type</label>
-                <select asp-for="@Model.NewEvent.EventType" class="form-control" asp-items="Html.GetEnumSelectList<EventType>()">
-                </select>
-                <span asp-validation-for="@Model.NewEvent.EventType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Assist</label>
-                <select asp-for="@Model.NewEvent.PlayerAssistId" class="form-control" asp-items="@Model.playersInMatch">
-                    <option value="null"></option>
-                </select>
+                <select disabled>
+                    </select>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <label>Player</label>
+
+                        <select asp-for="@Model.NewEvent.PlayerEventId" class="form-control" asp-items="@Model.playersInMatch">
+                            <option value="null"></option>
+                        </select>
+                    </div>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="@Model.NewEvent.PenaltyType" class="control-label"></label>
-                <select asp-for="@Model.NewEvent.PenaltyType" class="form-control" asp-items="Html.GetEnumSelectList<PenaltyType>()" >
+                <select asp-for="@Model.NewEvent.PenaltyType" class="form-control" asp-items="Html.GetEnumSelectList<PenaltyType>()">
                     <option value="null"></option>
                 </select>
                 <span asp-validation-for="@Model.NewEvent.PenaltyType" class="text-danger"></span>
@@ -51,16 +50,20 @@
                 <input asp-for="@Model.NewEvent.MatchId" type="hidden" class="form-control" value="@Model.MatchId" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                @if (Model.playersInMatch.Count == 0)
+                {
+                    <input type="submit" value="Create" class="btn btn-primary" disabled/>
+                }else
+                {
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                }
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

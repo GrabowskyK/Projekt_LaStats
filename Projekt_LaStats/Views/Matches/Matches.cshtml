@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Projekt_LaStats.Models.Match>
+﻿@model Projekt_LaStats.ViewModel.PossibleToCreateMatchInEmptyMatch
 
 @{
     ViewData["Title"] = "Matches";
@@ -8,7 +8,7 @@
         <tbody>
             <tr style="text-align:center">
                 <td class="td-choose-option">
-                    <a asp-action="InfoLeague" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().HomeTeam.LeagueId">
+                    <a asp-action="InfoLeague" asp-controller="Info" asp-route-id="@Model.leagueId">
                         <div>Teams</div>
                     </a>
                     </td>
@@ -16,12 +16,12 @@
                         <div>Games</div>
                 </td>
                 <td class="td-choose-option">
-                    <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().HomeTeam.LeagueId">
+                    <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@Model.leagueId">
                         <div>Points</div>
                     </a>
                 </td>
                 <td class="td-choose-option">
-                    <a asp-action="InfoPlayerPenalty" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().HomeTeam.LeagueId">
+                    <a asp-action="InfoPlayerPenalty" asp-controller="Info" asp-route-id="@Model.leagueId">
                         <div>Penalties</div>
                     </a>
                 </td>
@@ -30,35 +30,36 @@
     </table>
 </div>
 <h1>Matches</h1>
-
 <p>
-    <a asp-action="AddMatch" asp-controller="Matches">Create new match</a>
-</p>
-    @foreach (var item in Model){
-    <div class="Match">
-        <div class="match-left-team">
-                <a asp-action="PlayersInTeam" asp-controller="Player" asp-route-id="@item.HomeTeam.Id">
-                @Html.DisplayFor(modelItem => item.HomeTeam.Name)
-                </a>
-        </div>
-            
-        <div class="match-info">
-                <p style="font-size: 33px;">
-                    <a asp-action="EventsInMatch" asp-controller="Event" asp-route-id="@item.Id">
-                    @Html.DisplayFor(modelItem => item.ScoreHomeTeam) : @Html.DisplayFor(modelItem => item.ScoreGuestTeam)
+    <a asp-action="AddMatch" asp-controller="Matches" asp-route-id="@Model.leagueId">Create new match</a>
+    </p>
+@if(Model.matches.Count != 0)
+{
+    @foreach (var item in Model.matches){
+        <div class="Match">
+            <div class="match-left-team">
+                    <a asp-action="PlayersInTeam" asp-controller="Player" asp-route-id="@item.HomeTeam.Id">
+                    @Html.DisplayFor(modelItem => item.HomeTeam.Name)
                     </a>
-                </p>
-                <p style="font-size: 13px;"> 
-                    @item.Date.ToString().Substring(0,10)<br>
-                    @Html.DisplayFor(modelItem => item.Place)
-                </p>
+            </div>
+            
+            <div class="match-info">
+                    <p style="font-size: 33px;">
+                        <a asp-action="EventsInMatch" asp-controller="Event" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.ScoreHomeTeam) : @Html.DisplayFor(modelItem => item.ScoreGuestTeam)
+                        </a>
+                    </p>
+                    <p style="font-size: 13px;"> 
+                        @item.Date.ToString().Substring(0,10)<br>
+                        @Html.DisplayFor(modelItem => item.Place)
+                    </p>
                 
+            </div>
+            <div class="match-right-team">
+                <a asp-action="PlayersInTeam" asp-controller="Player" asp-route-id="@item.GuestTeam.Id">
+                    @Html.DisplayFor(modelItem => item.GuestTeam.Name)
+                </a>
+            </div>
         </div>
-        <div class="match-right-team">
-            <a asp-action="PlayersInTeam" asp-controller="Player" asp-route-id="@item.GuestTeam.Id">
-                @Html.DisplayFor(modelItem => item.GuestTeam.Name)
-            </a>
-        </div>
-    </div>
     }
-</table>
+}

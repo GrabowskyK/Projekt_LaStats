@@ -2,6 +2,7 @@
 using Projekt_LaStats.Service;
 using Projekt_LaStats.ViewModel;
 using Projekt_LaStats.Models;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Projekt_LaStats.Controllers
 {
@@ -19,15 +20,19 @@ namespace Projekt_LaStats.Controllers
         [Route("Matches")]
         public IActionResult Matches(int id)
         {
-            var matches = matchesService.GetAllMatches().Where(m => m.HomeTeam.LeagueId == id);
-            return View(matches);
+            PossibleToCreateMatchInEmptyMatch viewModel = new();
+            
+            var matchesFromLeague = matchesService.GetAllMatches().Where(m => m.HomeTeam.LeagueId == id).ToList();
+            viewModel.matches = matchesFromLeague;
+            viewModel.leagueId = id;
+            return View(viewModel);
         }
 
         [Route("Matches/AddMatch")]
-        public IActionResult AddMatch()
+        public IActionResult AddMatch(int id)
         {
             CreateMatchVM viewModel = new CreateMatchVM();
-            viewModel.teams = matchesService.GetTeams();
+            viewModel.teams = matchesService.GetTeamsFromLeague(id);
             viewModel.match = new Match();
             return View(viewModel);
         }
@@ -38,7 +43,7 @@ namespace Projekt_LaStats.Controllers
         {
             viewModel.match.ScoreHomeTeam = 0;
             viewModel.match.ScoreGuestTeam = 0;
-            viewModel.match.Date = new DateTime(viewModel.year, viewModel.month, viewModel.day);
+            viewModel.match.Date = new DateTime(viewModel.year, viewModel.month, viewModel.day, viewModel.hour, viewModel.minute, 0);
             matchesService.AddMatch(viewModel.match);
             var leagueId = matchesService.GetLeagueId(viewModel.match.HomeTeamId);
             return RedirectToAction("Matches", new {id = leagueId });

@@ -120,3 +120,13 @@ a:hover{
     background-color: #606060;
     color: white;
 }
+
+.AddEventButton{
+    width: 70%;
+    padding: 8px;
+    border-radius: 30px;
+    position: relative;
+    background-color: #2f4367;
+    color: white;
+
+}

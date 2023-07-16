@@ -16,7 +16,7 @@ namespace Projekt_LaStats.Service
         }
 
         public IEnumerable<Match> GetAllMatches() => databaseContext.Matches.Include(m => m.GuestTeam).Include(m => m.HomeTeam);
-        public List<SelectListItem> GetTeams() => databaseContext.Team.Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name }).ToList();
+        public List<SelectListItem> GetTeamsFromLeague(int id) => databaseContext.Team.Where(t => t.LeagueId == id).Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name }).ToList();
 
         public void AddMatch(Match match)
         {

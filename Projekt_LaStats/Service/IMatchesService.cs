@@ -6,7 +6,7 @@ namespace Projekt_LaStats.Service
     public interface IMatchesService
     {
         IEnumerable<Match> GetAllMatches();
-        List<SelectListItem> GetTeams();
+        List<SelectListItem> GetTeamsFromLeague(int id);
         void AddMatch(Match match);
         int GetLeagueId(int id);
     }

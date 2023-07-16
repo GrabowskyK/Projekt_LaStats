@@ -2,14 +2,19 @@
 
 @{
     ViewData["Title"] = "AddMatch";
-}q
+}
 
-<h1>AddMatch</h1>
-
-<h4>Match</h4>
+<h1>Add Match</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
+        @if(Model.teams.Count <= 1)
+        {
+            <p style="color: red">At first you have to add at least 2 teams</p>
+        }
+        else
+        {
+            
         <form asp-action="AddMatchPost">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -20,6 +25,7 @@
                 <label class="control-label">Away team</label>
                 <select asp-for="@Model.match.GuestTeamId" class="form-control" asp-items="@Model.teams"></select>
             </div>
+            <br />
             <div class="form-group">
                 <label>Date</label>
                 <select style="width: 120px;" asp-for="@Model.day">
@@ -47,20 +53,21 @@
                     {
                         <option>@i</option>
                     }
-                </select><br />
-                <select style="width: 120px;" asp-for="@Model.hour">
+                </select><br /><br />
+                <label>Time</label>
+                <select style="width: 60px;" asp-for="@Model.hour">
                     @for (int i = 0; i <= 23; i++)
                     {
                         <option>@i</option>
                     }
                 </select>
-                <select style="width: 120px;" asp-for="@Model.minute">
+                <select style="width: 60px;" asp-for="@Model.minute">
                     @for (int i = 0; i <= 59; i++)
                     {
                         <option>@i</option>
                     }
                 </select>
-            </div>
+            </div><br />
             <div class="form-group">
                 <label asp-for="@Model.match.Place" class="control-label"></label>
                 <input asp-for="@Model.match.Place" class="form-control" />
@@ -70,12 +77,10 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+        }
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

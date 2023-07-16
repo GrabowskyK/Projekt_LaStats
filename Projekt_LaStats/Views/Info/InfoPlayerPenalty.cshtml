@@ -8,17 +8,17 @@
         <tbody>
             <tr style="text-align:center">
                 <td class="td-choose-option">
-                    <a asp-action="InfoLeague" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
+                    <a asp-action="InfoLeague" asp-controller="Info" asp-route-id="@ViewBag.Id">
                         <div>Teams</div>
                     </a>
                 </td>
                 <td class="td-choose-option">
-                    <a asp-action="Matches" asp-controller="Matches" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
+                    <a asp-action="Matches" asp-controller="Matches" asp-route-id="@ViewBag.Id">
                         <div>Games</div>
                     </a>
                 </td>
                 <td class="td-choose-option">
-                    <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
+                    <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@ViewBag.Id">
                         <div>Points</div>
                     </a>
                 </td>

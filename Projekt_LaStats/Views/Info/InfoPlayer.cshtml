@@ -8,12 +8,12 @@
         <tbody>
             <tr style="text-align:center">
                 <td class="td-choose-option">
-                    <a asp-action="InfoLeague" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
+                    <a asp-action="InfoLeague" asp-controller="Info" asp-route-id="@ViewBag.Id">
                         <div>Teams</div>
                     </a>
                     </td>
                 <td class="td-choose-option">
-                    <a asp-action="Matches" asp-controller="Matches" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
+                    <a asp-action="Matches" asp-controller="Matches" asp-route-id="@ViewBag.Id">
                         <div>Games</div>
                     </a>
                 </td>
@@ -21,7 +21,7 @@
                         <div>Points</div>
                 </td>
                 <td class="td-choose-option">
-                    <a asp-action="InfoPlayerPenalty" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().Team.LeagueId">
+                    <a asp-action="InfoPlayerPenalty" asp-controller="Info" asp-route-id="@ViewBag.Id">
                         <div>Penalties</div>
                     </a>
                 </td>
@@ -29,7 +29,7 @@
         </tbody>
     </table>
 </div>
-<h1>InfoPlayer</h1>
+<h1>Info about goals and assists</h1>
 <table class="table" style="width: 700px; margin: 0 auto;">
     <thead style="text-align:center;">
         <tr>

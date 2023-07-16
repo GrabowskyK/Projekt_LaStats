@@ -32,8 +32,6 @@ namespace Projekt_LaStats.Service
             databaseContext.SaveChanges();
         }
 
-        public IEnumerable<Team> GetLeagues() => databaseContext.Team.Include(t => t.League);
-        public List<SelectListItem> LeaguesNames() => databaseContext.Leagues.Select(l => new SelectListItem { Value = l.Id.ToString(), Text = l.Name}).ToList();
         public IEnumerable<Team> TeamsInLeague(int id) => databaseContext.Team.Include(t => t.League).Where(t => t.LeagueId == id);
     }
 }

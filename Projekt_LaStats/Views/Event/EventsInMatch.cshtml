@@ -4,13 +4,34 @@
 @{
     ViewData["Title"] = "EventsInMatch";
 }
-
-<h1>EventsInMatch</h1>
-
-<p>
-    <a asp-action="AddEvent" asp-route-id="@Model.MatchId">Create New</a>
-</p>
-
+<table class="table">
+    <tbody>
+        <tr style="text-align:center">
+            
+            <td class="td-choose-option">
+                <a asp-action="InfoLeague" asp-controller="Info" asp-route-id="@Model.LeagueId">
+                    <div>Teams</div>
+                    </a>
+            </td>
+            </a>
+            <td class="td-choose-option">
+                <a asp-action="Matches" asp-controller="Matches" asp-route-id="@Model.LeagueId">
+                    <div>Games</div>
+                </a>
+            </td>
+            <td class="td-choose-option">
+                <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@Model.LeagueId">
+                    <div>Points</div>
+                </a>
+            </td>
+            <td class="td-choose-option">
+                <a asp-action="InfoPlayerPenalty" asp-controller="Info" asp-route-id="@Model.LeagueId">
+                    <div>Penalties</div>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
 <h1>Goals</h1>
 <table class="table">
     <thead>
@@ -66,7 +87,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PlayerEvent.Team.ShortName)
                 </td>
-                <td>
+                <td style="width: 50px; text-align:center;">
                     @Html.DisplayFor(modelItem => item.PlayerEvent.ShirtNumber)
                 </td>
                 <td>
@@ -75,7 +96,7 @@
                     }
                     @firstLetterName. @Html.DisplayFor(modelItem => item.PlayerEvent.Surname)
                 </td>
-                <td>
+                <td style="width: 50px; text-align:center;">
                     @Html.DisplayFor(modelItem => item.PlayerAssist.ShirtNumber)
                 </td>
                 <td>
@@ -97,8 +118,12 @@
             </tr>
         }
     </tbody>
-</table>
-
+    
+</table><center>
+    <a asp-action="AddEventGoal" asp-route-id="@Model.MatchId">
+    <button class="AddEventButton">Add Goal</button>
+    </a>
+</center>
 <h1>Penalties</h1>
 <table class="table">
     <thead>
@@ -134,11 +159,11 @@
             <td>
                     @Html.DisplayFor(modelItem => item.PlayerEvent.Team.ShortName)
             </td>
-                <td>
+                <td style="width: 50px; text-align:center;">
                     @Html.DisplayFor(modelItem => item.PlayerEvent.ShirtNumber)
                 </td>
             <td>
-                    @Html.DisplayFor(modelItem => item.PlayerEvent.Name).ToString().Substring(0,1). @Html.DisplayFor(modelItem => item.PlayerEvent.Surname)
+                    @item.PlayerEvent.Name.Substring(0,1). @Html.DisplayFor(modelItem => item.PlayerEvent.Surname)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PenaltyType)
@@ -150,3 +175,8 @@
 }
     </tbody>
 </table>
+<center>
+    <a asp-action="AddEventPenalty" asp-route-id="@Model.MatchId">
+    <button class="AddEventButton">Add Penalty</button>
+    </a>
+</center>

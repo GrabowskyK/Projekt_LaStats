@@ -11,6 +11,7 @@
         public int ScoreHomeTeam { get; set; } = 0;
         public int ScoreGuestTeam { get;set; } = 0;
         public string Place { get; set; }
+        public bool IsEnded { get; set; } = false;
 
 
         public Match() { }

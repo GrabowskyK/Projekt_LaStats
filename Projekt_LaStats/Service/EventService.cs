@@ -51,6 +51,7 @@ namespace Projekt_LaStats.Service
             }))
         .ToList();
 
+        public int GetLeagueId(int id) => databaseContext.Matches.Include(m => m.HomeTeam).Where(m => m.Id == id).Select(m => m.HomeTeam.LeagueId).FirstOrDefault();
 
         public List<SelectListItem> GetPlayersInTeam(int idHomeTeam, int idAwayTeam) => databaseContext.Players
             .Where(p => p.TeamId == idHomeTeam || p.TeamId == idAwayTeam)
@@ -71,10 +72,12 @@ namespace Projekt_LaStats.Service
             if (newEvent.EventType == (EventType)0)
             {
                 record.Goals += 1;
+                record.Points += 2;
                 if(newEvent.PlayerAssistId != null)
                 {
                     var recordAssist = databaseContext.Players.Where(p => p.Id == newEvent.PlayerAssistId).FirstOrDefault();
                     recordAssist.Assist += 1;
+                    record.Points += 1;
                 }
             }
             else if(newEvent.EventType == (EventType)1)
@@ -94,6 +97,22 @@ namespace Projekt_LaStats.Service
             else
             {
                 recordMatch.ScoreGuestTeam += 1;
+            }
+            databaseContext.SaveChanges();
+        }
+
+        public void UpdateTeamBilance(Event newEvent)
+        {
+            var recordMatch = databaseContext.Matches.Where(m => m.Id == newEvent.MatchId).Include(m => m.HomeTeam).Include(m => m.GuestTeam).FirstOrDefault();
+            if(recordMatch.HomeTeamId == newEvent.PlayerEvent.TeamId)
+            {
+                recordMatch.HomeTeam.ScoredGoals += 1;
+                recordMatch.GuestTeam.LostGoals += 1;
+            }
+            else
+            {
+                recordMatch.HomeTeam.ScoredGoals += 1;
+                recordMatch.GuestTeam.LostGoals += 1;
             }
             databaseContext.SaveChanges();
         }

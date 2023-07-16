@@ -25,19 +25,13 @@
                 <span asp-validation-for="@Model.NewTeam.ShortName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.NewTeam.LeagueId" class="control-label"></label>
-                <select asp-for="@Model.NewTeam.LeagueId" class="form-control" asp-items="@Model.leagues">
-                </select>
+                <input type="text" asp-for="@Model.leaguesId" value="@Model.leaguesId" hidden />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

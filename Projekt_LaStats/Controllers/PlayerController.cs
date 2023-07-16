@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Projekt_LaStats.Models;
 using Projekt_LaStats.Service;
+using Projekt_LaStats.ViewModel;
 using System.Numerics;
 
 namespace Projekt_LaStats.Controllers
@@ -39,7 +40,6 @@ namespace Projekt_LaStats.Controllers
         [Route("Teams/{id}/AddPlayer")]
         public IActionResult AddPlayer(int id)
         {
-            //TODO: Sprawdzić czy dana drużyna istnieje
             ViewBag.TeamId = id;
             return View();
         }

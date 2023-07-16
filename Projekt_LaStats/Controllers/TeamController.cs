@@ -36,12 +36,11 @@ namespace Projekt_LaStats.Controllers
         }
 
 
-        public IActionResult AddTeam()
+        public IActionResult AddTeam(int id)
         {
-            List<SelectListItem> NameLeague = teamService.LeaguesNames().ToList();
             CreateTeamVM viewModel = new CreateTeamVM();
             viewModel.NewTeam = new Team();
-            viewModel.leagues = NameLeague;
+            viewModel.leaguesId = id;
 
             return View(viewModel);
         }
@@ -49,9 +48,9 @@ namespace Projekt_LaStats.Controllers
         [HttpPost]
         public IActionResult AddTeam(CreateTeamVM createTeamVM)
         {
-            Team team = new(createTeamVM.NewTeam.Name, createTeamVM.NewTeam.ShortName, createTeamVM.NewTeam.LeagueId);
+            Team team = new(createTeamVM.NewTeam.Name, createTeamVM.NewTeam.ShortName, createTeamVM.leaguesId);
             teamService.AddTeam(team);
-            return RedirectToAction("Teams");
+            return RedirectToAction("InfoLeague","Info", new {id = createTeamVM.leaguesId});
         }
 
         [HttpPost]

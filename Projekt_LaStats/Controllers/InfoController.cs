@@ -21,14 +21,24 @@ namespace Projekt_LaStats.Controllers
         [Route("{id}")]
         public IActionResult InfoLeague(int id)
         {
-            var teams = infoService.TeamsInLeagueStats(id).ToList();;
-            return View(teams);
+            PossibleToCreateTeamInEmptyLeague viewModel = new PossibleToCreateTeamInEmptyLeague();
+
+            var teams = infoService.TeamsInLeagueStats(id).ToList();
+            viewModel.id = id;
+            if(teams != null)
+            {
+                viewModel.team = teams;
+                return View(viewModel);
+            }
+            return View(viewModel);
+            
         }
 
         [Route("{id}/points")]
         public IActionResult InfoPlayer(int id)
         {
             var players = infoService.GetScoredPlayers(id);
+            ViewBag.Id = id;
             return View(players);
         }
 
@@ -36,6 +46,7 @@ namespace Projekt_LaStats.Controllers
         public IActionResult InfoPlayerPenalty(int id)
         {
             var players = infoService.GetPenaltyPlayers(id);
+            ViewBag.Id = id;
             return View(players);
         }
     }

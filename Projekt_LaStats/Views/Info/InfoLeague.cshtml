@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Projekt_LaStats.Models.Team>
+﻿@model Projekt_LaStats.ViewModel.PossibleToCreateTeamInEmptyLeague
 @{
     ViewData["Title"] = "Info";
 }
@@ -8,17 +8,17 @@
         <tr style="text-align:center">
                 <td class="td-choose-option" style="background-color: #505050">Teams</td>
                 <td class="td-choose-option">
-                    <a asp-action="Matches" asp-controller="Matches" asp-route-id="@Model.FirstOrDefault().LeagueId">
+                    <a asp-action="Matches" asp-controller="Matches" asp-route-id="@Model.id">
                         <div>Games</div>
                         </a>
                     </td>
                 <td class="td-choose-option">
-                    <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@Model.FirstOrDefault().LeagueId">
+                    <a asp-action="InfoPlayer" asp-controller="Info" asp-route-id="@Model.id">
                         <div>Points</div>
                     </a>
                     </td>
                 <td class="td-choose-option">
-                    <a asp-action="InfoPlayerPenalty" asp-controller="Info"  asp-route-id="@Model.FirstOrDefault().LeagueId">
+                    <a asp-action="InfoPlayerPenalty" asp-controller="Info" asp-route-id="@Model.id">
                         <div>Penalties</div>
                     </a>
                 </td>
@@ -33,22 +33,22 @@
                 Rank
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Team
             </th>
             <th>
                 Games Played
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.wins)
+                Wins
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.draw)
+                Draw
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.lose)
+                Lose
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.points)
+                Points
             </th>
             <th>
                 Bilance
@@ -56,23 +56,31 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @{
+            var iterate = 1;
+        }
+        @foreach (var item in Model.team)
         {
             <tr>
                 <td class="td-info">
-                    @item.Id
+                    @iterate
+                    @{
+                        iterate += 1;
+                    }
                 </td>
                 <td class="td-info" style="width: 300px; font-size: 20px">
+                    <a asp-action="PlayersInTeam" asp-controller="Player" asp-route-id="@item.Id">
                         @Html.DisplayFor(modelItem => item.Name)
+                    </a>
                 </td>
                 <td class="td-info">
-                    @(@item.wins+@item.lose+@item.draw)
+                    @(@item.wins + @item.lose + @item.draw)
                 </td>
                 <td class="td-info">
-                        @Html.DisplayFor(modelItem => item.wins)
+                    @Html.DisplayFor(modelItem => item.wins)
                 </td>
                 <td class="td-info">
-                        @Html.DisplayFor(modelItem => item.lose)
+                    @Html.DisplayFor(modelItem => item.lose)
                 </td>
                 <td class="td-info">
                     @Html.DisplayFor(modelItem => item.draw)
@@ -86,4 +94,9 @@
             </tr>
         }
     </tbody>
-</table>
+</table><br />
+<center>
+    <a asp-action="AddTeam" asp-controller="Team" asp-route-id="@Model.id">
+        <button class="AddEventButton" style="width:50%;">Add Team</button>
+    </a>
+</center>
