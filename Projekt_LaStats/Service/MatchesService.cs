@@ -43,7 +43,32 @@ namespace Projekt_LaStats.Service
                 match.FirstOrDefault().IsEnded = false;
             }
             databaseContext.SaveChanges();
-            
+        }
+
+        public void UpdateTeamsStats(int matchId) //k to zmienna gdy jest zmieniane zakończenie meczu.
+        {
+            var match = databaseContext.Matches.Where(m => m.Id == matchId).Include(m => m.HomeTeam).Include(m => m.GuestTeam).FirstOrDefault();
+            int k = (match.IsEnded == false) ? k=-1 : k = 1;
+            if(match.ScoreHomeTeam > match.ScoreGuestTeam)
+            {
+                match.HomeTeam.wins += k;
+                match.HomeTeam.points += (3 * k);
+                match.GuestTeam.lose += k;
+            }
+            else if(match.ScoreHomeTeam < match.ScoreGuestTeam)
+            {
+                match.GuestTeam.wins += k;
+                match.GuestTeam.points += (3 * k);
+                match.HomeTeam.lose += k;
+            }
+            else
+            {
+                match.GuestTeam.draw += k;
+                match.GuestTeam.points += k;
+                match.HomeTeam.points += k;
+                match.HomeTeam.draw += k;
+            }
+            databaseContext.SaveChanges();
         }
     }
 }

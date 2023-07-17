@@ -11,5 +11,6 @@ namespace Projekt_LaStats.Service
         int GetLeagueId(int id);
         void ChangeGameEnd(int id);
         int GetLeagueIdFromMatchid(int id);
+        void UpdateTeamsStats(int matchId);
     }
 }

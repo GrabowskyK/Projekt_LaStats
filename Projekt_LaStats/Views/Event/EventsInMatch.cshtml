@@ -33,10 +33,19 @@
     </tbody>
 </table>
 <form asp-action="GameEnded" asp-controller="Matches" asp-route-id="@Model.MatchId">
-    <label>Is game end?</label>
-    <input asp-for="@Model.IsGameEnd" value="@Model.IsGameEnd" type="checkbox" />
     <div class="form-group">
-        <input type="submit" value="Change" class="btn btn-primary" />
+        <center>
+        <input asp-for="@Model.IsGameEnd" value="@Model.IsGameEnd" type="checkbox" hidden/>
+        @if(Model.IsGameEnd == false)
+        {
+            <input type="submit" value="Click to end the game!" class="btn btn-primary" />
+        }
+        else
+        {
+            <input type="submit" value="Click to edit again!" class="btn btn-primary" />
+            }
+        </center>
+
     </div>
 </form>
 <h1>Goals</h1>
@@ -127,9 +136,12 @@
     </tbody>
     
 </table><center>
-    <a asp-action="AddEventGoal" asp-route-id="@Model.MatchId">
-    <button class="AddEventButton">Add Goal</button>
-    </a>
+    @if (Model.IsGameEnd == false)
+    {
+        <a asp-action="AddEventGoal" asp-route-id="@Model.MatchId">
+            <button class="AddEventButton">Add Goal</button>
+        </a>
+    }
 </center>
 <h1>Penalties</h1>
 <table class="table">
@@ -183,7 +195,10 @@
     </tbody>
 </table>
 <center>
-    <a asp-action="AddEventPenalty" asp-route-id="@Model.MatchId">
-    <button class="AddEventButton">Add Penalty</button>
-    </a>
+    @if(Model.IsGameEnd == false)
+    {
+        <a asp-action="AddEventPenalty" asp-route-id="@Model.MatchId">
+            <button class="AddEventButton">Add Penalty</button>
+        </a>
+    }
 </center>

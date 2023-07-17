@@ -27,6 +27,7 @@ namespace Projekt_LaStats.Controllers
             viewModel.eventFaul = eventService.GetEventsFromMatchOnlyFauls(id);
             viewModel.MatchId = id;
             viewModel.LeagueId = eventService.GetLeagueId(id);
+            viewModel.IsGameEnd = eventService.GetValueOfEndMatch(id);
             return View(viewModel);
         }
 

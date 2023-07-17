@@ -17,5 +17,6 @@ namespace Projekt_LaStats.Service
         void UpdateDataAboutScore(Event newEvent);
         void UpdateTeamBilance(Event newEvent);
         int GetLeagueId(int id);
+        bool GetValueOfEndMatch(int id);
     }
 }

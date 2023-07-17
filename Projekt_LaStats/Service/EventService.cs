@@ -77,7 +77,7 @@ namespace Projekt_LaStats.Service
                 {
                     var recordAssist = databaseContext.Players.Where(p => p.Id == newEvent.PlayerAssistId).FirstOrDefault();
                     recordAssist.Assist += 1;
-                    record.Points += 1;
+                    recordAssist.Points += 1;
                 }
             }
             else if(newEvent.EventType == (EventType)1)
@@ -111,10 +111,12 @@ namespace Projekt_LaStats.Service
             }
             else
             {
-                recordMatch.HomeTeam.ScoredGoals += 1;
-                recordMatch.GuestTeam.LostGoals += 1;
+                recordMatch.HomeTeam.LostGoals += 1;
+                recordMatch.GuestTeam.ScoredGoals += 1;
             }
             databaseContext.SaveChanges();
         }
+
+        public bool GetValueOfEndMatch(int id) => databaseContext.Matches.Where(m => m.Id == id).Select(m => m.IsEnded).FirstOrDefault(); 
     }
 }

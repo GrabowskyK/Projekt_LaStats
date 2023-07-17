@@ -1,4 +1,4 @@
-﻿@model Projekt_LaStats.Models.Player
+﻿@model Projekt_LaStats.ViewModel.CreatePlayerVM
 
 @{
     ViewData["Title"] = "AddPlayer";
@@ -13,35 +13,60 @@
         <form asp-action="AddPlayerPost">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="@Model.player.Name" class="control-label"></label>
+                <input asp-for="@Model.player.Name" class="form-control" />
+                <span asp-validation-for="@Model.player.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Surname" class="control-label"></label>
-                <input asp-for="Surname" class="form-control" />
-                <span asp-validation-for="Surname" class="text-danger"></span>
+                <label asp-for="@Model.player.Surname" class="control-label"></label>
+                <input asp-for="@Model.player.Surname" class="form-control" />
+                <span asp-validation-for="@Model.player.Surname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ShirtNumber" class="control-label"></label>
-                <input asp-for="ShirtNumber" class="form-control" />
-                <span asp-validation-for="ShirtNumber" class="text-danger"></span>
+                <label asp-for="@Model.player.ShirtNumber" class="control-label"></label>
+                <input asp-for="@Model.player.ShirtNumber" class="form-control" />
+                <span asp-validation-for="@Model.player.ShirtNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateBorn" class="control-label"></label>
-                <input asp-for="DateBorn" class="form-control" />
-                <span asp-validation-for="DateBorn" class="text-danger"></span>
+                <br />
+                 <label>Date</label>
+                <select style="width: 120px;" asp-for="@Model.day">
+                    @for(int i = 1; i <= 31; i++)
+                    {
+                        <option>@i</option>
+                    }
+                </select>
+                <select style="width: 120px;" asp-for="@Model.month">
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option> 
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                </select>
+                <select style="width: 120px;" asp-for="@Model.year">
+                    @for (int i = 1950; i <= 2024; i++)
+                    {
+                        <option>@i</option>
+                    }
+                </select><br /><br />
             </div>
             
             <div class="form-group">
-                <label asp-for="Position" class="control-label"></label>
-                <select asp-for="Position" class="form-control" asp-items="Html.GetEnumSelectList<PlayerPosition>()">
+                <label asp-for="@Model.player.Position" class="control-label"></label>
+                <select asp-for="@Model.player.Position" class="form-control" asp-items="Html.GetEnumSelectList<PlayerPosition>()">
                     
                 </select>
-                <span asp-validation-for="Position" class="text-danger"></span>
+                <span asp-validation-for="@Model.player.Position" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="TeamId" type="hidden" class="form-control" value="@ViewBag.TeamId"/>
+                <input asp-for="@Model.TeamId" type="hidden" class="form-control" value="@Model.TeamId" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

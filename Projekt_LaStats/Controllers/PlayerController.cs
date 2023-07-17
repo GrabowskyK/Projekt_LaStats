@@ -40,13 +40,16 @@ namespace Projekt_LaStats.Controllers
         [Route("Teams/{id}/AddPlayer")]
         public IActionResult AddPlayer(int id)
         {
-            ViewBag.TeamId = id;
-            return View();
+            CreatePlayerVM viewModel = new();
+            viewModel.TeamId = id;
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult AddPlayerPost(Player player)
+        public IActionResult AddPlayerPost(CreatePlayerVM playerVM)
         {
+            DateTime time = new(playerVM.year, playerVM.month, playerVM.day);
+            Player player = new(playerVM.player.Name, playerVM.player.Surname, time, playerVM.player.Position, 0, 0, 0, 0, (int)playerVM.player.ShirtNumber, playerVM.TeamId);
             playerService.AddPlayer(player);
             return RedirectToAction("PlayersInTeam", new { id = player.TeamId });
         }

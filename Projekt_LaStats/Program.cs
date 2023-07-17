@@ -15,7 +15,7 @@ builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IMatchesService, MatchesService>();
 builder.Services.AddScoped<IEventService, EventService>();
 
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("Server = (localdb)\\mysql; Database = LaxStat; Trusted_Connection = True; MultipleActiveResultSets = true"));
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("Server = (localdb)\\mysql; Database = Projekt_LaStats; Trusted_Connection = True; MultipleActiveResultSets = true"));
 
 var app = builder.Build();
 

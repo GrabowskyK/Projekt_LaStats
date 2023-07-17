@@ -4,16 +4,16 @@
     ViewData["Title"] = "PlayersInTeam";
 }
 
-<h1>PlayersInTeam</h1>
+<h1>@Model.FirstOrDefault().Team.Name</h1>
 
 <p>
-    <a asp-action="AddPlayer" asp-controller="Player" asp-route-id="@Model.FirstOrDefault().TeamId">Create New</a>
+    <a asp-action="AddPlayer" asp-controller="Player" asp-route-id="@Model.FirstOrDefault().TeamId">Add player</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ShirtNumber)
+            <th style="width:50px; text-align:center;">
+                #
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -42,17 +42,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.MinutesPenalty)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Team)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ShirtNumber)
+                    <center>@Html.DisplayFor(modelItem => item.ShirtNumber)</center>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -61,33 +57,25 @@
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateBorn)
+                @item.DateBorn.ToString().Substring(0,10)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Position)
             </td>
-            <td>
+                <td class="td-info">
                 @Html.DisplayFor(modelItem => item.Goals)
             </td>
-            <td>
+                <td class="td-info">
                 @Html.DisplayFor(modelItem => item.Assist)
             </td>
-            <td>
+                <td class="td-info">
                 @Html.DisplayFor(modelItem => item.Points)
             </td>
-            <td>
+                <td class="td-info">
                 @Html.DisplayFor(modelItem => item.Penalty)
             </td>
-            <td>
+                <td class="td-info">
                 @Html.DisplayFor(modelItem => item.MinutesPenalty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Team.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

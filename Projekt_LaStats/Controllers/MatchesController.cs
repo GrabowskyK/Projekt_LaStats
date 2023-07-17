@@ -53,6 +53,7 @@ namespace Projekt_LaStats.Controllers
         public IActionResult GameEnded(int id)
         {
             matchesService.ChangeGameEnd(id);
+            matchesService.UpdateTeamsStats(id);
             var leagueId = matchesService.GetLeagueIdFromMatchid(id);
             return RedirectToAction("InfoLeague", "Info", new { id = leagueId });
         }
